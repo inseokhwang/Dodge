@@ -6,9 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Actor {
 	private String actorType;
 	private Circle circle;
-	private Vector2 position;
-	private Vector2 velocity;
-	private Vector2 acceleration;
+	protected Vector2 position;
+	protected Vector2 velocity;
+	protected Vector2 acceleration;
 	
 	public Actor(String actorType, float x, float y, float r) {
 		this.actorType = actorType;
@@ -26,15 +26,21 @@ public abstract class Actor {
 		// Increase velocity due to acceleration and verify velocity limit
 		velocity.add(acceleration.cpy().scl(delta));
 		if (velocity.x > 100)
-			velocity.x = 50;
+			velocity.x = 100;
+		if (velocity.x < -75)
+			velocity.x = -75;
 		if (velocity.y > 100)
-			velocity.y = 50;
+			velocity.y = 100;
+		if (velocity.y < -75)
+			velocity.y = -75;
 		
 		// Changing position of the actor
 		position.add(velocity.cpy().scl(delta));		
 		circle.setPosition(position);
 		
 		if (position.y > 370)
+			return true;
+		if (position.y < -100)
 			return true;
 		return false;
 	}

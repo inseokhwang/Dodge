@@ -27,28 +27,20 @@ public class GameRenderer {
          * White background
          */
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-        /*
-         * 2. We draw the Filled rectangle
-         */
-        if(!world.gameOver) {
-	        shapeRenderer.begin(ShapeType.Filled);
-	
-	        shapeRenderer.setColor(255/255f, 0/255f, 0/255f, 1);
-	        shapeRenderer.circle(world.getPlayer().getCircle().x, world.getPlayer().getCircle().y, world.getPlayer().getCircle().radius);
-	        
-	        shapeRenderer.setColor(0/255f, 0/255f, 255/255f, 1);
-	        
-	        for(Enemy e: world.getEnemy()) {
-	        	shapeRenderer.circle(e.getCircle().x,e.getCircle().y,e.getCircle().radius);
-	        }
-	        
-	        shapeRenderer.end();
-        } else {
-        	
-        }
+        shapeRenderer.begin(ShapeType.Filled);
+        if (!world.gameOver) {
+        	shapeRenderer.setColor(255/255f, 0/255f, 0/255f, 1);
+			shapeRenderer.circle(world.getPlayer().getCircle().x, world.getPlayer().getCircle().y, world.getPlayer().getCircle().radius);
+		}
+        shapeRenderer.setColor(0/255f, 0/255f, 255/255f, 1);
+		for(Enemy e: world.getEnemy()) {
+			shapeRenderer.circle(e.getCircle().x,e.getCircle().y,e.getCircle().radius);
+		}
+		
+		shapeRenderer.end();
 	}
 
 }
