@@ -11,7 +11,7 @@ public class GameWorld {
 	private Dodger player;
 	private ArrayList<Enemy> enemy;
 	private float timer, difficulty;
-	private Enemy toRemove;
+	private ArrayList<Enemy> toRemove;
 	private long score;
 	public boolean gameOver;
 	
@@ -22,11 +22,11 @@ public class GameWorld {
 		timer = 0f;
 		difficulty = 1f;
 		score = 0;
-		toRemove = null;
+		toRemove = new ArrayList<Enemy>();
 		
 		//initialize each enemy with random velocity and x-acceleration, but always a random positive y-acceleration
 		for(int i = 0; i < 10; i++)
-			enemy.add(new Enemy((float) Enemy.random(300), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 10)));
+			enemy.add(new Enemy((float) Enemy.random(240) + 240f, -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100)));
 		gameOver = false;
 	}
 	
@@ -39,16 +39,17 @@ public class GameWorld {
 	}
 	
 	private void increaseEnemy() {
-		enemy.add(new Enemy((float) Enemy.random(300), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 10)));
+		enemy.add(new Enemy((float) Enemy.random(240) + 240f, -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100)));
 	}
 	
 	public void update(float delta) {
 		timer = timer + delta;
 		if (timer > 1.0f) {
-			increaseEnemy();
+			for (int i = 0; i < 10; i++)
+				increaseEnemy();
 			timer = timer - difficulty;
 			System.out.println("increased");
-			if (difficulty > .2f)
+			if (difficulty > .05f)
 				difficulty -= 0.01f;
 			
 			score++;
@@ -63,11 +64,12 @@ public class GameWorld {
 			}
 		}
 		player.update(delta);
-        for (Enemy e: enemy) {
-        	if (e.update(delta))
-        		toRemove = e;
-        }
-        enemy.remove(toRemove);
-        System.out.println(enemy.size());
+		
+		for (int i = 0; i < enemy.size(); i++) {
+			if (enemy.get(i).update(delta))
+        		enemy.remove(i);
+		}
+		
+        System.out.println(enemy.size() + ",  " + ((float) 1/delta));
 	}
 }

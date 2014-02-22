@@ -25,14 +25,14 @@ public abstract class Actor {
 	public boolean update(float delta) {
 		// Increase velocity due to acceleration and verify velocity limit
 		velocity.add(acceleration.cpy().scl(delta));
-		if (velocity.x > 100)
-			velocity.x = 100;
-		if (velocity.x < -75)
-			velocity.x = -75;
-		if (velocity.y > 100)
-			velocity.y = 100;
-		if (velocity.y < -75)
-			velocity.y = -75;
+		if (velocity.x > 200)
+			velocity.x = 200;
+		if (velocity.x < -200)
+			velocity.x = -200;
+		if (velocity.y > 200)
+			velocity.y = 200;
+		if (velocity.y < -200)
+			velocity.y = -200;
 		
 		// Changing position of the actor
 		position.add(velocity.cpy().scl(delta));		

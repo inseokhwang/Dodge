@@ -16,6 +16,6 @@ public class Enemy extends Actor {
 	}
 	
 	public static float random(float max) {
-		return (float) (Math.random() * max * 2 - Math.random() * max);
+		return (float) (Math.random() * max * 2 - max);
 	}
 }
