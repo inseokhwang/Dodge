@@ -2,6 +2,7 @@ package com.engsoc.actors;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
+import com.engsoc.world.GameWorld;
 
 public abstract class Actor {
 	private String actorType;
@@ -22,7 +23,7 @@ public abstract class Actor {
 		return circle;
 	}
 	
-	public boolean update(float delta) {
+	public boolean update(float delta, GameWorld world) {
 		// Increase velocity due to acceleration and verify velocity limit
 		velocity.add(acceleration.cpy().scl(delta));
 		if (velocity.x > 200)
@@ -38,7 +39,7 @@ public abstract class Actor {
 		position.add(velocity.cpy().scl(delta));		
 		circle.setPosition(position);
 		
-		if (position.y > 370)
+		if (position.y > world.getH() + 50f)
 			return true;
 		if (position.y < -100)
 			return true;

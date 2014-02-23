@@ -2,6 +2,7 @@ package com.engsoc.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.engsoc.world.GameWorld;
 
 public class Dodger extends Actor {
 	
@@ -11,7 +12,7 @@ public class Dodger extends Actor {
 	}
 	
 	@Override
-	public boolean update(float delta) {
+	public boolean update(float delta, GameWorld world) {
 		// Update velocity
 		float z = Gdx.input.getAzimuth();
 		float x = Gdx.input.getPitch();
@@ -22,14 +23,13 @@ public class Dodger extends Actor {
 		if (x >  30)
 			x = 30;
 		if (y < -30)
-			y = 30;
+			y = -30;
 		if (y >  30)
 			y = 30;
+		
 		// Multiply by acc of 10, so 30 / 10 = 3
 		x = x * -30;
 		y = y * -30;
-		
-		System.out.println(velocity.x + " " + velocity.y);
 		
 		velocity = new Vector2(x , y);
 		

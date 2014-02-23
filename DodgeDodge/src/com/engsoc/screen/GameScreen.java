@@ -10,12 +10,12 @@ public class GameScreen implements Screen {
 	
 	private GameWorld world;
 	private GameRenderer renderer;
+	
 
 	
-	public GameScreen () {
-		world = new GameWorld();
+	public GameScreen (float w, float h) {
+		world = new GameWorld(w, h);
 		renderer = new GameRenderer(world);
-
 		System.out.println("GameScreen Attached");
 	}
 

@@ -14,8 +14,10 @@ public class GameWorld {
 	private ArrayList<Enemy> toRemove;
 	private long score;
 	public boolean gameOver;
+	private float w;
+	private float h;
 	
-	public GameWorld() {
+	public GameWorld(float w, float h) {
 		//init initial variables
 		enemy = new ArrayList<Enemy>();
 		player = new Dodger();
@@ -23,10 +25,12 @@ public class GameWorld {
 		difficulty = 1f;
 		score = 0;
 		toRemove = new ArrayList<Enemy>();
+		this.w = w;
+		this.h = h;
 		
 		//initialize each enemy with random velocity and x-acceleration, but always a random positive y-acceleration
 		for(int i = 0; i < 10; i++)
-			enemy.add(new Enemy((float) Enemy.random(240) + 240f, -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100)));
+			enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100)));
 		gameOver = false;
 	}
 	
@@ -39,7 +43,7 @@ public class GameWorld {
 	}
 	
 	private void increaseEnemy() {
-		enemy.add(new Enemy((float) Enemy.random(240) + 240f, -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100)));
+		enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100)));
 	}
 	
 	public void update(float delta) {
@@ -48,9 +52,8 @@ public class GameWorld {
 			for (int i = 0; i < 10; i++)
 				increaseEnemy();
 			timer = timer - difficulty;
-			System.out.println("increased");
-			if (difficulty > .05f)
-				difficulty -= 0.01f;
+			if (difficulty > .2001f)
+				difficulty -= 0.001f;
 			
 			score++;
 		}
@@ -63,13 +66,19 @@ public class GameWorld {
 				}
 			}
 		}
-		player.update(delta);
+		player.update(delta, this);
 		
 		for (int i = 0; i < enemy.size(); i++) {
-			if (enemy.get(i).update(delta))
+			if (enemy.get(i).update(delta, this))
         		enemy.remove(i);
 		}
-		
-        System.out.println(player.getCircle().x + ", " + player.getCircle().y);
+	}
+	
+	public float getH() {
+		return h;
+	}
+	
+	public float getW() {
+		return w;
 	}
 }
