@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class GameWorld {
 	
-	private Dodger player;
+	public Dodger player;
 	private ArrayList<Enemy> enemy;
 	private float timer, difficulty;
 	private ArrayList<Enemy> toRemove;
@@ -70,6 +70,6 @@ public class GameWorld {
         		enemy.remove(i);
 		}
 		
-        System.out.println(enemy.size() + ",  " + ((float) 1/delta));
+        System.out.println(player.getCircle().x + ", " + player.getCircle().y);
 	}
 }

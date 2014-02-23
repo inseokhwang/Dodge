@@ -2,17 +2,20 @@ package com.engsoc.screen;
 
 import com.engsoc.world.GameWorld;
 import com.engsoc.world.GameRenderer;
-
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class GameScreen implements Screen {
 	
 	private GameWorld world;
 	private GameRenderer renderer;
+
 	
 	public GameScreen () {
 		world = new GameWorld();
 		renderer = new GameRenderer(world);
+
 		System.out.println("GameScreen Attached");
 	}
 
