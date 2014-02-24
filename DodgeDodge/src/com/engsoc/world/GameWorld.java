@@ -30,7 +30,7 @@ public class GameWorld {
 		
 		//initialize each enemy with random velocity and x-acceleration, but always a random positive y-acceleration
 		for(int i = 0; i < 10; i++)
-			enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100)));
+			enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100), w + h));
 		gameOver = false;
 	}
 	
@@ -43,7 +43,7 @@ public class GameWorld {
 	}
 	
 	private void increaseEnemy() {
-		enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100)));
+		enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100), w + h));
 	}
 	
 	public void update(float delta) {
