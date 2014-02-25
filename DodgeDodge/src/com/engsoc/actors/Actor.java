@@ -26,14 +26,14 @@ public abstract class Actor {
 	public boolean update(float delta, GameWorld world) {
 		// Increase velocity due to acceleration and verify velocity limit
 		velocity.add(acceleration.cpy().scl(delta));
-		if (velocity.x > 200)
-			velocity.x = 200;
-		if (velocity.x < -200)
-			velocity.x = -200;
-		if (velocity.y > 200)
-			velocity.y = 200;
-		if (velocity.y < -200)
-			velocity.y = -200;
+		if (velocity.x > 300)
+			velocity.x = 300;
+		if (velocity.x < -300)
+			velocity.x = -300;
+		if (velocity.y > 300)
+			velocity.y = 300;
+		if (velocity.y < -300)
+			velocity.y = -300;
 		
 		// Changing position of the actor
 		position.add(velocity.cpy().scl(delta));		

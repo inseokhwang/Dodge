@@ -7,14 +7,13 @@ import com.engsoc.world.GameWorld;
 public class Dodger extends Actor {
 	
 	
-	public Dodger() {
-		super("Dodger", 240, 160, 10);
+	public Dodger(float w, float h) {
+		super("Dodger", w/2, h/2, (w+h)/125);
 	}
 	
 	@Override
 	public boolean update(float delta, GameWorld world) {
 		// Update velocity
-		float z = Gdx.input.getAzimuth();
 		float x = Gdx.input.getPitch();
 		float y = Gdx.input.getRoll();
 		
@@ -34,17 +33,17 @@ public class Dodger extends Actor {
 		velocity = new Vector2(x , y);
 		
 		// Changing position of the actor
-		position.add(velocity.cpy().scl(delta));		
+		position.add(velocity.cpy().scl(delta));
+
 		getCircle().setPosition(position);
 		
 		return false;
 	}
 	
 	public String geoStatus() {
-		float z = Gdx.input.getAzimuth();
 		float x = Gdx.input.getPitch();
 		float y = Gdx.input.getRoll();
-		String s = new String("Azimuth: " + z + "\nPitch: " + x + "\nRoll: " + y);
+		String s = new String("Pitch: " + x + "\nRoll: " + y);
 		return s;
 	}
 }

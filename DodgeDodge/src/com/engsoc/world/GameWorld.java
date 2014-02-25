@@ -20,7 +20,7 @@ public class GameWorld {
 	public GameWorld(float w, float h) {
 		//init initial variables
 		enemy = new ArrayList<Enemy>();
-		player = new Dodger();
+		player = new Dodger(w, h);
 		timer = 0f;
 		difficulty = 1f;
 		score = 0;
@@ -30,7 +30,7 @@ public class GameWorld {
 		
 		//initialize each enemy with random velocity and x-acceleration, but always a random positive y-acceleration
 		for(int i = 0; i < 10; i++)
-			enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100), w + h));
+			enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 1000), w + h));
 		gameOver = false;
 	}
 	
@@ -43,7 +43,7 @@ public class GameWorld {
 	}
 	
 	private void increaseEnemy() {
-		enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 100), w + h));
+		enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 1000), w + h));
 	}
 	
 	public void update(float delta) {
@@ -52,10 +52,9 @@ public class GameWorld {
 			for (int i = 0; i < 10; i++)
 				increaseEnemy();
 			timer = timer - difficulty;
-			if (difficulty > .2001f)
-				difficulty -= 0.001f;
-			
-			score++;
+			if (difficulty > .201f)
+				difficulty -= 0.01f;
+			score += 100;
 		}
 		
 		if (!gameOver) {
@@ -65,9 +64,9 @@ public class GameWorld {
 					System.out.println("GameOVER");
 				}
 			}
+			player.update(delta, this);
 		}
-		player.update(delta, this);
-		
+		int enemySize = enemy.size();
 		for (int i = 0; i < enemy.size(); i++) {
 			if (enemy.get(i).update(delta, this))
         		enemy.remove(i);
@@ -80,5 +79,10 @@ public class GameWorld {
 	
 	public float getW() {
 		return w;
+	}
+
+	public long getScore() {
+		// TODO Auto-generated method stub
+		return score;
 	}
 }

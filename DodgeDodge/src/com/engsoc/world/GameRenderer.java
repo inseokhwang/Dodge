@@ -38,7 +38,9 @@ public class GameRenderer {
 		
 		batch.begin();
 		
-		font.drawMultiLine(batch, world.player.geoStatus(), 0, 0);
+		String status = world.player.geoStatus() + "\nScore:" + world.getScore();
+		
+		font.drawMultiLine(batch, status, 0, 0);
 
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
