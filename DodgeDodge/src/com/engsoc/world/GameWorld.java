@@ -82,7 +82,6 @@ public class GameWorld {
 	}
 
 	public long getScore() {
-		// TODO Auto-generated method stub
 		return score;
 	}
 }

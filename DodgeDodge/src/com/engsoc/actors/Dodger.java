@@ -1,6 +1,7 @@
 package com.engsoc.actors;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.engsoc.world.GameWorld;
 
@@ -9,6 +10,7 @@ public class Dodger extends Actor {
 	
 	public Dodger(float w, float h) {
 		super("Dodger", w/2, h/2, (w+h)/125);
+		picture = new Texture("data/player.png");
 	}
 	
 	@Override

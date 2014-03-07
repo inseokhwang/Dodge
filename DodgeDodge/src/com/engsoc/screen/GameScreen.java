@@ -21,44 +21,37 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
 		world.update(delta);
 		renderer.render();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 		System.out.println("resized");
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 		System.out.println("show'ed");
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
 		System.out.println("hidden");
 	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
 		System.out.println("paused");
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
 		System.out.println("resumed");
 	}
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		System.out.println("disposed");
 	}
 

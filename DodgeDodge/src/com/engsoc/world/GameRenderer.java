@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -27,6 +28,7 @@ public class GameRenderer {
 		font.setColor(Color.RED);
 		batch = new SpriteBatch(); 
 		
+		
 		shapeRenderer = new ShapeRenderer();
 		shapeRenderer.setProjectionMatrix(cam.combined);
 	}
@@ -47,12 +49,11 @@ public class GameRenderer {
 
         shapeRenderer.begin(ShapeType.Filled);
         if (!world.gameOver) {
-        	shapeRenderer.setColor(255/255f, 0/255f, 0/255f, 1);
-			shapeRenderer.circle(world.getPlayer().getCircle().x, world.getPlayer().getCircle().y, world.getPlayer().getCircle().radius);
+			batch.draw(world.getPlayer().getPic(),world.getPlayer().getCircle().x, world.getPlayer().getCircle().y);
 		}
         shapeRenderer.setColor(0/255f, 0/255f, 255/255f, 1);
 		for(Enemy e: world.getEnemy()) {
-			shapeRenderer.circle(e.getCircle().x,e.getCircle().y,e.getCircle().radius);
+			batch.draw(e.getPic(),e.getCircle().x, e.getCircle().y);
 		}
 		
 		shapeRenderer.end();

@@ -1,5 +1,6 @@
 package com.engsoc.actors;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.engsoc.world.GameWorld;
 
@@ -8,6 +9,7 @@ public class Enemy extends Actor {
 		super("Enemy", x, y, size / 150);
 		setVelocity(vel);
 		setAcceleration(acc);
+		picture = new Texture("data/enemy.png");
 	}
 	
 	@Override

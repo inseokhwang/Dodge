@@ -8,7 +8,6 @@ public class DGame extends Game {
 
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		System.out.println("DGame created");
