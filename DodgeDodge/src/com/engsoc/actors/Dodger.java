@@ -2,7 +2,6 @@ package com.engsoc.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.engsoc.world.GameWorld;
 
 public class Dodger extends Actor {
 	
@@ -12,7 +11,7 @@ public class Dodger extends Actor {
 	}
 	
 	@Override
-	public boolean update(float delta, GameWorld world) {
+	public void update() {
 		// Update velocity
 		float x = Gdx.input.getPitch();
 		float y = Gdx.input.getRoll();
@@ -36,8 +35,6 @@ public class Dodger extends Actor {
 		position.add(velocity.cpy().scl(delta));
 
 		getCircle().setPosition(position);
-		
-		return false;
 	}
 	
 	public String geoStatus() {
@@ -45,5 +42,10 @@ public class Dodger extends Actor {
 		float y = Gdx.input.getRoll();
 		String s = new String("Pitch: " + x + "\nRoll: " + y);
 		return s;
+	}
+	
+	@Override
+	public void run() {
+		this.update();
 	}
 }

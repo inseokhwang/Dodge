@@ -1,6 +1,7 @@
 package com.engsoc.world;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
+import com.engsoc.actors.Actor;
 import com.engsoc.actors.Dodger;
 import com.engsoc.actors.Enemy;
 
@@ -11,7 +12,6 @@ public class GameWorld {
 	public Dodger player;
 	private ArrayList<Enemy> enemy;
 	private float timer, difficulty;
-	private ArrayList<Enemy> toRemove;
 	private long score;
 	public boolean gameOver;
 	private float w;
@@ -20,17 +20,18 @@ public class GameWorld {
 	public GameWorld(float w, float h) {
 		//init initial variables
 		enemy = new ArrayList<Enemy>();
+		Actor.setWorld(this);
 		player = new Dodger(w, h);
 		timer = 0f;
 		difficulty = 1f;
 		score = 0;
-		toRemove = new ArrayList<Enemy>();
 		this.w = w;
 		this.h = h;
 		
+		
 		//initialize each enemy with random velocity and x-acceleration, but always a random positive y-acceleration
 		for(int i = 0; i < 10; i++)
-			enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 1000), w + h));
+			enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 1000), w + h, this));
 		gameOver = false;
 	}
 	
@@ -43,10 +44,11 @@ public class GameWorld {
 	}
 	
 	private void increaseEnemy() {
-		enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 1000), w + h));
+		enemy.add(new Enemy((float) Enemy.random(w/2) + (w/2), -50f, new Vector2(Enemy.random(10),Enemy.random(10)),new Vector2(Enemy.random(10),(float) Math.random() * 1000), w + h, this));
 	}
 	
 	public void update(float delta) {
+		Actor.setDelta(delta);
 		timer = timer + delta;
 		if (timer > 1.0f) {
 			for (int i = 0; i < 10; i++)
@@ -64,11 +66,11 @@ public class GameWorld {
 					System.out.println("GameOVER");
 				}
 			}
-			player.update(delta, this);
+			player.update();
 		}
-		int enemySize = enemy.size();
 		for (int i = 0; i < enemy.size(); i++) {
-			if (enemy.get(i).update(delta, this))
+			(new Thread(enemy.get(i))).start();
+			if (enemy.get(i).toBeRemoved == true)
         		enemy.remove(i);
 		}
 	}

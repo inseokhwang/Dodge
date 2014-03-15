@@ -4,12 +4,15 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.engsoc.world.GameWorld;
 
-public abstract class Actor {
+public abstract class Actor implements Runnable {
 	private String actorType;
 	private Circle circle;
 	protected Vector2 position;
 	protected Vector2 velocity;
 	protected Vector2 acceleration;
+	protected static float delta;
+	protected static GameWorld world;
+	public boolean toBeRemoved;
 	
 	public Actor(String actorType, float x, float y, float r) {
 		this.actorType = actorType;
@@ -17,13 +20,14 @@ public abstract class Actor {
 		velocity = new Vector2(0,0);
 		acceleration = new Vector2(0,0);
 		circle = new Circle(x,y,r);
+		toBeRemoved = false;
 	}
 	
 	public Circle getCircle() {
 		return circle;
 	}
 	
-	public boolean update(float delta, GameWorld world) {
+	public void update() {
 		// Increase velocity due to acceleration and verify velocity limit
 		velocity.add(acceleration.cpy().scl(delta));
 		if (velocity.x > 300)
@@ -40,10 +44,9 @@ public abstract class Actor {
 		circle.setPosition(position);
 		
 		if (position.y > world.getH() + 50f)
-			return true;
+			toBeRemoved = true;
 		if (position.y < -100)
-			return true;
-		return false;
+			toBeRemoved = true;
 	}
 	
 	public void setVelocity(Vector2 add) {
@@ -54,4 +57,15 @@ public abstract class Actor {
 		acceleration.add(add);
 	}
 	
+	@Override
+	public void run() {
+	}
+	
+	public static void setDelta(float change) {
+		delta = change;
+	}
+	
+	public static void setWorld(GameWorld newWorld) {
+		world = newWorld;
+	}
 }
