@@ -7,6 +7,7 @@ import com.engsoc.world.GameWorld;
 
 public class Dodger extends Actor {
 	
+	private Texture picture;
 	
 	public Dodger(float w, float h) {
 		super("Dodger", w/2, h/2, (w+h)/125);
@@ -47,5 +48,9 @@ public class Dodger extends Actor {
 		float y = Gdx.input.getRoll();
 		String s = new String("Pitch: " + x + "\nRoll: " + y);
 		return s;
+	}
+	
+	public Texture getPic() {
+		return picture;
 	}
 }

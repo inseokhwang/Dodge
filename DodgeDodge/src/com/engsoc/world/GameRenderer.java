@@ -53,7 +53,7 @@ public class GameRenderer {
 		}
         shapeRenderer.setColor(0/255f, 0/255f, 255/255f, 1);
 		for(Enemy e: world.getEnemy()) {
-			batch.draw(e.getPic(),e.getCircle().x, e.getCircle().y);
+			batch.draw(Enemy.getPic(),e.getCircle().x, e.getCircle().y);
 		}
 		
 		shapeRenderer.end();

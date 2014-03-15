@@ -11,7 +11,6 @@ public abstract class Actor {
 	protected Vector2 position;
 	protected Vector2 velocity;
 	protected Vector2 acceleration;
-	protected Texture picture;
 	
 	public Actor(String actorType, float x, float y, float r) {
 		this.actorType = actorType;
@@ -54,9 +53,5 @@ public abstract class Actor {
 	
 	public void setAcceleration(Vector2 add) {
 		acceleration.add(add);
-	}
-	
-	public Texture getPic () {
-		return picture;
 	}
 }
